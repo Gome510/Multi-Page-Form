@@ -4,8 +4,11 @@
 
 #root {
   height: 100vh;
-  background-color: hsl(0, 0%, 90%);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+body {
+  background-color: hsl(0, 0%, 90%);
 }

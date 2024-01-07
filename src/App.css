@@ -6,11 +6,19 @@
 .w-sidebar {
   min-width: 274px;
 }
+
 .h-sidebar {
   height: 568px;
 }
+
 .font-ubuntu {
   font-family: Ubuntu;
+}
+.w-section {
+  min-width: 1100px;
+}
+.w-form {
+  min-width: 600px;
 }
 
 .bg-light-blue {

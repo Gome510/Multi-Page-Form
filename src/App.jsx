@@ -1,92 +1,66 @@
 import { useState } from "react";
-
 import "./App.css";
-
+import YourInfo from "./components/YourInfo";
+import SelectPlan from "./components/SelectPlan";
+import Addons from "./components/Addons";
+import Summary from "./components/Summary";
+import StepCard from "./components/Sidebar/StepCard";
 function App() {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    plan: "Arcade",
+    billing: "Monthly",
+    addons: [],
+  });
+
+  let formComponent = <YourInfo />;
+  switch (step) {
+    case 1:
+      formComponent = <YourInfo />;
+      break;
+    case 2:
+      formComponent = <SelectPlan />;
+      break;
+    case 3:
+      formComponent = <Addons />;
+      break;
+    case 4:
+      formComponent = <Summary />;
+      break;
+  }
+
   return (
-    <section className="w-4/5 rounded-lg bg-white shadow-lg p-5 flex items-center font-ubuntu text-base">
+    <section className="w-section rounded-lg bg-white shadow-lg p-5 flex items-center font-ubuntu text-base">
       <div className="bg-sidebar h-sidebar w-sidebar p-10">
-        <div className="flex items-center mb-8">
-          <div className="w-10 h-10 rounded-full bg-light-blue flex items-center justify-center font-bold mr-4">
-            1
-          </div>
-          <div>
-            <p className="text-gray-400">STEP 1</p>
-            <strong className="text-white tracking-widest">YOUR INFO</strong>
-          </div>
-        </div>
-
-        <div className="flex items-center mb-8">
-          <div className="w-10 h-10 rounded-full bg-transparent border text-white flex items-center justify-center font-bold mr-4">
-            1
-          </div>
-          <div>
-            <p className="text-gray-400">STEP 2</p>
-            <strong className="text-white tracking-widest">SELECT PLAN</strong>
-          </div>
-        </div>
-
-        <div className="flex items-center mb-8">
-          <div className="w-10 h-10 rounded-full bg-transparent border text-white flex items-center justify-center font-bold mr-4">
-            1
-          </div>
-          <div>
-            <p className="text-gray-400">STEP 3</p>
-            <strong className="text-white tracking-widest">ADD-ONS</strong>
-          </div>
-        </div>
-
-        <div className="flex items-center mb-8">
-          <div className="w-10 h-10 rounded-full bg-transparent border text-white flex items-center justify-center font-bold mr-4">
-            1
-          </div>
-          <div>
-            <p className="text-gray-400">STEP 4</p>
-            <strong className="text-white tracking-widest">SUMMARY</strong>
-          </div>
-        </div>
+        <StepCard name="Your Info" number={1} active={step == 1} />
+        <StepCard name="Select Plan" number={2} active={step == 2} />
+        <StepCard name="Add-ons" number={3} active={step == 3} />
+        <StepCard name="Summary" number={4} active={step == 4} />
       </div>
+
       <div className="h-sidebar w-full flex justify-center ">
-        <div className="relative mt-10 m-5">
-          <h1 className="text-3xl font-bold mb-2">Personal info</h1>
-          <p className="text-gray-400 mb-8">
-            Please provide your name, email address, and phone number.
-          </p>
-          <div className="flex flex-col">
-            <label className="mb-1" htmlFor="name">
-              Name
-            </label>
-            <input
-              id="name"
-              className="border-2 p-2 rounded-lg mb-4"
-              type="text"
-              placeholder="e.g. Stephen King"
-            />
-            <label className="mb-1" htmlFor="email">
-              Email Address
-            </label>
-            <input
-              className="border-2 p-2 rounded-lg mb-4"
-              type="email"
-              id="email"
-              placeholder="e.g. stephenking@lorem.com"
-            />
-            <label className="mb-1" htmlFor="phone">
-              Phone Number
-            </label>
-            <input
-              id="phone"
-              className="border-2 p-2 rounded-lg mb-4"
-              type="text"
-              placeholder="e.g. +1 234 567 890"
-            />
+        <div className="relative mt-10 m-5 w-form">
+          {formComponent}
+
+          <div className="absolute bottom-0 flex w-full justify-between">
+            <button
+              className="text-gray-400"
+              type="button"
+              onClick={() => setStep(step - 1)}
+            >
+              Go Back
+            </button>
+            <button
+              type="button"
+              className=" bg-black text-white p-3 rounded-lg pl-6 pr-6"
+              onClick={() => setStep(step + 1)}
+            >
+              Next Step
+            </button>
           </div>
-          <button
-            type="button"
-            className="absolute right-0 bottom-0 bg-black text-white p-3 rounded-lg pl-6 pr-6"
-          >
-            Next Step
-          </button>
         </div>
       </div>
     </section>
