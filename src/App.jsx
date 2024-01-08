@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import YourInfo from "./components/YourInfo";
-import SelectPlan from "./components/SelectPlan";
-import Addons from "./components/Addons";
-import Summary from "./components/Summary";
+import YourInfo from "./components/YourInfo/YourInfo";
+import SelectPlan from "./components/SelectPlan/SelectPlan";
+import Addons from "./components/Addons/Addons";
+import Summary from "./components/Summary/Summary";
 import StepCard from "./components/Sidebar/StepCard";
 function App() {
   const [step, setStep] = useState(1);
@@ -16,19 +16,65 @@ function App() {
     addons: [],
   });
 
-  let formComponent = <YourInfo />;
+  function handleFormChange(event) {
+    if (event.target.name == undefined) return;
+
+    let newFormData = {};
+    if (event.target.name == "billing") {
+      const newValue = event.target.checked ? "Monthly" : "Yearly";
+      newFormData = {
+        ...formData,
+        [event.target.name]: newValue,
+      };
+    } else if (event.target.name == "addons") {
+      let newAddons = [];
+      if (formData.addons.includes(event.target.value)) {
+        newAddons = formData.addons.filter(
+          (addon) => addon != event.target.value
+        );
+      } else {
+        newAddons = [...formData.addons];
+        newAddons.push(event.target.value);
+      }
+      newFormData = {
+        ...formData,
+        [event.target.name]: newAddons,
+      };
+    } else {
+      newFormData = {
+        ...formData,
+        [event.target.name]: event.target.value,
+      };
+    }
+
+    setFormData(newFormData);
+  }
+
+  console.log(formData);
+
+  let formComponent = (
+    <YourInfo formData={formData} handleFormChange={handleFormChange} />
+  );
   switch (step) {
     case 1:
-      formComponent = <YourInfo />;
+      formComponent = (
+        <YourInfo formData={formData} handleFormChange={handleFormChange} />
+      );
       break;
     case 2:
-      formComponent = <SelectPlan />;
+      formComponent = (
+        <SelectPlan formData={formData} handleFormChange={handleFormChange} />
+      );
       break;
     case 3:
-      formComponent = <Addons />;
+      formComponent = (
+        <Addons formData={formData} handleFormChange={handleFormChange} />
+      );
       break;
     case 4:
-      formComponent = <Summary />;
+      formComponent = (
+        <Summary formData={formData} handleFormChange={handleFormChange} />
+      );
       break;
   }
 
@@ -45,21 +91,23 @@ function App() {
         <div className="relative mt-10 m-5 w-form">
           {formComponent}
 
-          <div className="absolute bottom-0 flex w-full justify-between">
-            <button
-              className="text-gray-400"
-              type="button"
-              onClick={() => setStep(step - 1)}
-            >
-              Go Back
-            </button>
+          <div className="absolute bottom-0 flex flex-row-reverse w-full justify-between">
             <button
               type="button"
-              className=" bg-black text-white p-3 rounded-lg pl-6 pr-6"
+              className="bg-marine-blue text-white p-3 rounded-lg pl-6 pr-6"
               onClick={() => setStep(step + 1)}
             >
               Next Step
             </button>
+            {step != 1 && (
+              <button
+                className="text-gray-400 hover:text-marine-blue"
+                type="button"
+                onClick={() => setStep(step - 1)}
+              >
+                Go Back
+              </button>
+            )}
           </div>
         </div>
       </div>

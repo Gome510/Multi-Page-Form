@@ -7,8 +7,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  color: hsl(213, 96%, 18%);
 }
 
 body {
-  background-color: hsl(0, 0%, 90%);
+  background-color: hsl(217, 100%, 97%);
 }

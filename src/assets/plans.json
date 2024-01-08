@@ -1,0 +1,14 @@
+{
+  "Arcade": {
+    "name": "Arcade",
+    "monthlyPrice": 9
+  },
+  "Advanced": {
+    "name": "Advanced",
+    "monthlyPrice": 12
+  },
+  "Pro": {
+    "name": "Pro",
+    "monthlyPrice": 15
+  }
+}

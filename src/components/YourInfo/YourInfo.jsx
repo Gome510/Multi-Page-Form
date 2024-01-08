@@ -1,6 +1,6 @@
 import React from "react";
 
-function YourInfo() {
+function YourInfo({ formData, handleFormChange }) {
   return (
     <>
       <h1 className="text-3xl font-bold mb-2">Personal info</h1>
@@ -12,8 +12,12 @@ function YourInfo() {
           Name
         </label>
         <input
+          required
           id="name"
-          className="border-2 p-2 rounded-lg mb-4"
+          name="name"
+          value={formData.name}
+          onChange={() => handleFormChange(event)}
+          className="border-2 p-2 rounded-lg mb-4 focus:outline-purplish-blue"
           type="text"
           placeholder="e.g. Stephen King"
         />
@@ -21,7 +25,11 @@ function YourInfo() {
           Email Address
         </label>
         <input
-          className="border-2 p-2 rounded-lg mb-4"
+          required
+          name="email"
+          value={formData.email}
+          onChange={() => handleFormChange(event)}
+          className="border-2 p-2 rounded-lg mb-4 focus:outline-purplish-blue"
           type="email"
           id="email"
           placeholder="e.g. stephenking@lorem.com"
@@ -30,8 +38,12 @@ function YourInfo() {
           Phone Number
         </label>
         <input
+          required
           id="phone"
-          className="border-2 p-2 rounded-lg mb-4"
+          name="phone"
+          value={formData.phone}
+          onChange={() => handleFormChange(event)}
+          className="border-2 p-2 rounded-lg mb-4 focus:outline-purplish-blue"
           type="text"
           placeholder="e.g. +1 234 567 890"
         />
