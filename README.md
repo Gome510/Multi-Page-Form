@@ -1,4 +1,13 @@
 # Frontend Mentor - Multi-step form
+React, TailwindCSS
+
+Demo: https://unique-bavarois-a57217.netlify.app/
+
+## How To Run Locally:
+1. clone repo
+2. cd multi-page-form
+3. npm i
+4. npm run dev
 
 ![Design preview for the Multi-step form coding challenge](/public/design/desktop-preview.jpg)
 
